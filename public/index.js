@@ -110,6 +110,7 @@ let moodState=0;
 const collectionName="posts";
 /* === Main Code === */
 
+//below is function defined in firebase only so no function kwyowrd is used
 onAuthStateChanged(auth, (user) => {
   if (user) {
     showLoggedInView();
@@ -145,25 +146,13 @@ function authSignInWithGoogle() {
 
   signInWithPopup(auth, provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      // const credential = GoogleAuthProvider.credentialFromResult(result);
-      // const token = credential.accessToken;
-      // // The signed-in user info.
-      // const user = result.user;
-      // // IdP data available using getAdditionalUserInfo(result)
-      // ...
+  
       console.log("Sign in WIth google");
     })
     .catch((error) => {
-      // Handle Errors here.
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // // The email of the user's account used.
-      // const email = error.customData.email;
-      // // The AuthCredential type that was used.
-      // const credential = GoogleAuthProvider.credentialFromError(error);
+  
       console.log(error.message);
-      // ...
+     
     });
 }
 
@@ -184,18 +173,7 @@ function authSignInWithEmail() {
 
 function authCreateAccountWithEmail() {
   console.log("Sign up with email and password");
-  /*  Challenge:
-		Import the createUserWithEmailAndPassword function from 'firebase/auth'
 
-        Use the code from the documentaion to make this function work.
-        
-        Make sure to first create two consts, 'email' and 'password', to fetch the values from the input fields emailInputEl and passwordInputEl.
-       
-        If the creation of user is successful then you should show the logged in view using showLoggedInView()
-        If something went wrong, then you should log the error message using console.error.
-    */
-
-  // const auth = getAuth(); //since we have globally created it earlier
   const email = emailInputEl.value;
   const password = passwordInputEl.value;
   createUserWithEmailAndPassword(auth, email, password)
@@ -205,7 +183,7 @@ function authCreateAccountWithEmail() {
       // // ...  if signed up succes
       clearAuthFields();
     })
-    .catch((error) => {
+    .catch((error) => { 
       // const errorCode = error.code;
       // const errorMessage = error.message;
       // ..
@@ -214,14 +192,6 @@ function authCreateAccountWithEmail() {
 }
 
 function authSignOut() {
-  /*  Challenge:
-		Import the signOut function from 'firebase/auth'
-
-        Use the code from the documentaion to make this function work.
-       
-        If the log out is successful then you should show the logged out view using showLoggedOutView()
-        If something went wrong, then you should log the error message using console.error.
-    */
 
   signOut(auth)
     .then(() => {})
@@ -262,15 +232,8 @@ async function addPostToDB(postBody,user) {
 }
 
 async function updatePostInDB(docId, newBody) {
-  /* Challenge:
-      Import updateDoc and doc from 'firebase/firestore'
-      
-      Use the code from the documentation to make this function work.
-      
-      The function should update the correct post in the database using the docId.
-      
-      The body field should be updated with newBody as the new value.
-   */
+  
+  
   const postRef = doc(db, collectionName, docId);
 
   await updateDoc(postRef, {
@@ -279,13 +242,8 @@ async function updatePostInDB(docId, newBody) {
 }
 
 async function deletePostFromDB(docId) {
-  /* Challenge:
-      Import deleteDoc and doc from 'firebase/firestore'
-      
-      Use the code from the documentation to make this function work.
-      
-      The function should delete the correct post in the database using the docId
-   */
+ 
+
   await deleteDoc(doc(db, collectionName, docId))
 }
 
@@ -590,23 +548,7 @@ function showProfilePicture(imgElement, user) {
 // }
 
 function showUserGreeting(element, user) {
-  /*  Challenge:
-      Use the documentation to make this function work.
-      
-      This function has two parameters: element and user
-      
-      We will call this function inside of onAuthStateChanged when the user is logged in.
-      
-      The function will be called with the following arguments:
-      showUserGreeting(userGreetingEl, user)
-      
-      If the user has a display name, then set the textContent of element to:
-      "Hey John, how are you?"
-      Where John is replaced with the actual first name of the user
-      
-      Otherwise, set the textContent of element to:
-      "Hey friend, how are you?" 
-  */
+ 
   const displayName = user.displayName;
   if (displayName) {
     const userFirstName = displayName.split(" ")[0];
